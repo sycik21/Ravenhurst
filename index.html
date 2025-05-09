@@ -1,0 +1,103 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Ravenhurst Riddle</title>
+  <style>
+    body {
+      font-family: Georgia, serif;
+      background-color: #1c1c1c;
+      color: #f5f5f5;
+      max-width: 800px;
+      margin: auto;
+      padding: 2rem;
+    }
+    h1 {
+      text-align: center;
+    }
+    .hidden {
+      display: none;
+    }
+    input[type=text] {
+      width: 100%;
+      padding: 0.5rem;
+      margin: 1rem 0;
+      font-size: 1rem;
+    }
+    button {
+      padding: 0.5rem 1rem;
+      background-color: #444;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #666;
+    }
+  </style>
+</head>
+<body>
+  <div id="page1">
+    <h1>The Ravenhurst Riddle</h1>
+    <p>You stand in Lord Edmund's study. A raven figurine points to a book titled <em>The Odyssey</em>. A note reads:</p>
+    <blockquote>
+      "Wkh iluvw fulph lv exw d judsh ri zhdo."
+    </blockquote>
+    <p>Decode the message using a Caesar cipher (Shift -3):</p>
+    <input type="text" id="answer1" placeholder="Your decoded message..." />
+    <button onclick="checkAnswer1()">Submit</button>
+    <p id="error1" style="color:red"></p>
+  </div>  <div id="page2" class="hidden">
+    <h1>The Clock Puzzle</h1>
+    <p>You decoded the message: <em>"The first crime is but a grudge of zeal."</em></p>
+    <p>Now, a grandfather clock shows the following numbers: VII – III – XI – VI – IX.</p>
+    <p>These point to letters. Decode and unscramble them to form a word.</p>
+    <input type="text" id="answer2" placeholder="Unscrambled word..." />
+    <button onclick="checkAnswer2()">Submit</button>
+    <p id="error2" style="color:red"></p>
+  </div>  <div id="page3" class="hidden">
+    <h1>The Mirror Riddle</h1>
+    <p>The letters revealed the word: <em>FICK G</em>, which unscrambles to <em>GFCIK</em> (or another hidden meaning).</p>
+    <p>You walk to Echo Hall. A mirror reflects every painting but one: Lady Evangeline's.</p>
+    <blockquote>
+      "If truth you seek, face not the face, but the reflection out of place."
+    </blockquote>
+    <p>What is the answer to the riddle?</p>
+    <input type="text" id="answer3" placeholder="Answer..." />
+    <button onclick="checkAnswer3()">Submit</button>
+    <p id="error3" style="color:red"></p>
+  </div>  <div id="completion" class="hidden">
+    <h1>Well Done, Detective!</h1>
+    <p>You’ve uncovered the truth behind the first layer of the Ravenhurst Riddle. But more secrets lie beneath...</p>
+  </div>  <script>
+    function checkAnswer1() {
+      const input = document.getElementById("answer1").value.toLowerCase().trim();
+      if (input.includes("the first crime") && input.includes("grudge")) {
+        document.getElementById("page1").classList.add("hidden");
+        document.getElementById("page2").classList.remove("hidden");
+      } else {
+        document.getElementById("error1").innerText = "That's not quite right. Try decoding again.";
+      }
+    }
+
+    function checkAnswer2() {
+      const input = document.getElementById("answer2").value.toLowerCase().replace(/[^a-z]/g, "");
+      if (input.includes("fig") || input.includes("gift") || input.includes("fick")) {
+        document.getElementById("page2").classList.add("hidden");
+        document.getElementById("page3").classList.remove("hidden");
+      } else {
+        document.getElementById("error2").innerText = "Try decoding and unscrambling again.";
+      }
+    }
+
+    function checkAnswer3() {
+      const input = document.getElementById("answer3").value.toLowerCase().trim();
+      if (input.includes("reflection") || input.includes("lady evangeline")) {
+        document.getElementById("page3").classList.add("hidden");
+        document.getElementById("completion").classList.remove("hidden");
+      } else {
+        document.getElementById("error3").innerText = "Think about the odd reflection in the mirror.";
+      }
+    }
+  </script></body>
+</html>
